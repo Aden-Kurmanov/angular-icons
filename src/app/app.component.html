@@ -6,7 +6,7 @@
 
     <ng-container *ngIf="!loading">
       <div class="test">
-        <input type="file" #file (change)="get_file(file)">
+        <input type="file" #file (change)="get_file(file.files)">
 
         <button (click)="test()">test</button>
       </div>
