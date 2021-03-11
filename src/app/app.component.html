@@ -6,9 +6,13 @@
 
     <ng-container *ngIf="!loading">
       <div class="test">
-        <input type="file" #file (change)="get_file(file.files)">
+        <input type="file" #file (change)="get_file(file.files)" multiple>
 
         <button (click)="test()">test</button>
+      </div>
+
+      <div *ngIf="success">
+        <iframe src="/api/Icons/icons.html" width="100%" height="500px"></iframe>
       </div>
 
       <div class="clearfix mhl ptl">

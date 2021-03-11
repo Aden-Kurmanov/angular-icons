@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpRequest} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Subscription} from "rxjs";
 import {IconsService} from "./icons.service";
 
@@ -13,9 +13,11 @@ export class AppComponent implements OnInit{
   files: File[] = [];
   icons: {key: string, value: string}[] = [];
 
+  success: boolean = false;
+
   constructor(
     private http: HttpClient,
-    private iconsService: IconsService
+    private iconsService: IconsService,
   ) {
   }
 
@@ -33,28 +35,18 @@ export class AppComponent implements OnInit{
   }
 
   get_file(data) {
-    console.log('getData: ', data);
-    this.files.push(data);
+    this.files = data;
   }
 
   test() {
-    const formData = new FormData()
+    this.success = false;
+    const formData = new FormData();
     for (let i = 0; i < this.files.length; i++) {
       formData.append('file', this.files[i]);
     }
-    const uploadReq = new HttpRequest('POST', '/api/icon/testIcon', formData, {
-      reportProgress: true
+    this.http.post('/api/Icons/CreateFont', formData).subscribe((res: any) => {
+      this.success = res.status;
     });
-    this.http.request(uploadReq).subscribe((res) => {
-      console.log('res: ', res);
-    }, (err) => {
-      console.log('err: ', err);
-    })
-    // this.http.post('/api/icon/testIcon', 'hello').subscribe((res) => {
-    //   console.log('result: ', res);
-    // }, (err) => {
-    //   console.log('err: ', err);
-    // });
   }
 
 }

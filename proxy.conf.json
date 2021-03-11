@@ -3,5 +3,10 @@
     "target": "http://localhost:4220",
     "secure": false,
     "changeOrigin": true
+  },
+  "/icons-config": {
+    "target": "http://localhost:4220",
+    "secure": false,
+    "changeOrigin": true
   }
 }
